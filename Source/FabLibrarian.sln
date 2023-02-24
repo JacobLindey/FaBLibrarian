@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabLibrarian.Discord", "FabLibrarian.Discord\FabLibrarian.Discord.csproj", "{809E4566-789A-47FF-BFE0-28960C631495}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabLibrarian.CardLibrary", "FabLibrarian.CardLibrary\FabLibrarian.CardLibrary.csproj", "{9E24B2D1-8557-4440-9E26-28AB35581854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabLibrarian.CardLibrary.Tests", "FabLibrarian.CardLibrary.Tests\FabLibrarian.CardLibrary.Tests.csproj", "{4E11F299-D567-4214-9F9D-D59333EF3757}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{809E4566-789A-47FF-BFE0-28960C631495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809E4566-789A-47FF-BFE0-28960C631495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809E4566-789A-47FF-BFE0-28960C631495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809E4566-789A-47FF-BFE0-28960C631495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E24B2D1-8557-4440-9E26-28AB35581854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E24B2D1-8557-4440-9E26-28AB35581854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E24B2D1-8557-4440-9E26-28AB35581854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E24B2D1-8557-4440-9E26-28AB35581854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E11F299-D567-4214-9F9D-D59333EF3757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E11F299-D567-4214-9F9D-D59333EF3757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E11F299-D567-4214-9F9D-D59333EF3757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E11F299-D567-4214-9F9D-D59333EF3757}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
