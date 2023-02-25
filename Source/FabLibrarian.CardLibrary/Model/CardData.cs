@@ -1,25 +1,23 @@
 ﻿namespace FabLibrarian.CardLibrary.Model;
 
-public interface ICardData
-{
-    string CardName { get; }
-    string DatabaseUrl { get; }
-    string ImageUri { get; }
-}
-
 public class CardData : ICardData
 {
     public CardData(
         string cardName,
         string url,
-        string imageUri)
+        string[] imageUris)
     {
         CardName = cardName;
         DatabaseUrl = url;
-        ImageUri = imageUri;
+        ImageUris = imageUris;
     }
 
     public string CardName { get; }
     public string DatabaseUrl { get; }
-    public string ImageUri { get; }
+    public string[] ImageUris { get; }
+
+    public override string ToString()
+    {
+        return $"{{ card: {CardName}, db: {DatabaseUrl}, images: {string.Join(", ", ImageUris)} }}";
+    }
 }

@@ -1,0 +1,282 @@
+﻿[
+    {
+        "card_name": "Heart of Fyendal",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 0
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Rhinar, Reckless Rampage",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 1
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Rhinar",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 2
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Romping Club",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 3
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Scabskin Leathers",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 4
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Barkbone Strapping",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 5
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Alpha Rampage",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 6
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Bloodrush Bellow",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 7
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Reckless Swing",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 8
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Sand Sketched Plan",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 9
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Bone Head Barrier",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 10
+        },
+        "alt": []
+    },
+    {
+        "card_name": "Breakneck Battery",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 11
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 12
+            },
+            {
+                "set": "WTR",
+                "num": 13
+            }
+        ]
+    },
+    {
+        "card_name": "Savage Feast",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 14
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 15
+            },
+            {
+                "set": "WTR",
+                "num": 16
+            }
+        ]
+    },
+    {
+        "card_name": "Barraging Beatdown",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 17
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 18
+            },
+            {
+                "set": "WTR",
+                "num": 19
+            }
+        ]
+    },
+    {
+        "card_name": "Savage Swing",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 20
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 21
+            },
+            {
+                "set": "WTR",
+                "num": 22
+            }
+        ]
+    },
+    {
+        "card_name": "Pack Hunt",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 23
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 24
+            },
+            {
+                "set": "WTR",
+                "num": 25
+            }
+        ]
+    },
+    {
+        "card_name": "Smash Instinct",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 26
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 27
+            },
+            {
+                "set": "WTR",
+                "num": 28
+            }
+        ]
+    },
+    {
+        "card_name": "Wrecker Romp",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 29
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 30
+            },
+            {
+                "set": "WTR",
+                "num": 31
+            }
+        ]
+    },
+    {
+        "card_name": "Awakening Bellow",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 32
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 33
+            },
+            {
+                "set": "WTR",
+                "num": 34
+            }
+        ]
+    },
+    {
+        "card_name": "Awakening Bellow",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 32
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 33
+            },
+            {
+                "set": "WTR",
+                "num": 34
+            }
+        ]
+    },
+    {
+        "card_name": "Primeval Bellow",
+        "has_back": false,
+        "primary": {
+            "set": "WTR",
+            "num": 35
+        },
+        "alt": [
+            {
+                "set": "WTR",
+                "num": 36
+            },
+            {
+                "set": "WTR",
+                "num": 37
+            }
+        ]
+    }
+]
+  

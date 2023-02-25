@@ -4,5 +4,5 @@ namespace FabLibrarian.Discord;
 
 public interface ICardMatcher
 {
-    Task<IReadOnlyCollection<ICardData?>> Match(IEnumerable<string> requestedSearches);
+    Task<IReadOnlyCollection<(string, ICardData?)>> Match(IEnumerable<string> requestedSearches);
 }

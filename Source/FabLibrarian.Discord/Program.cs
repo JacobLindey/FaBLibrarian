@@ -5,7 +5,20 @@ using FabLibrarian.Discord;
 
 var config = new DiscordSocketConfig
 {
-    GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.MessageContent
+    GatewayIntents =
+        GatewayIntents.DirectMessageTyping | 
+        GatewayIntents.DirectMessageReactions | 
+        GatewayIntents.DirectMessages | 
+        GatewayIntents.GuildMessageTyping | 
+        GatewayIntents.GuildMessageReactions | 
+        GatewayIntents.GuildMessages | 
+        GatewayIntents.GuildVoiceStates |
+        GatewayIntents.GuildWebhooks | 
+        GatewayIntents.GuildIntegrations | 
+        GatewayIntents.GuildEmojis | 
+        GatewayIntents.GuildBans | 
+        GatewayIntents.Guilds | 
+        GatewayIntents.MessageContent
 };
 
 var client = new DiscordSocketClient(config);

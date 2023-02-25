@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using FabLibrarian.CardLibrary.Model;
+using FabLibrarian.CardLibrary.Services.Scryfall.Abstractions;
+using FabLibrarian.CardLibrary.Services.Scryfall.Model;
 
-namespace FabLibrarian.CardLibrary.Model;
+namespace FabLibrarian.CardLibrary.Services.Scryfall;
 
-public class ScryfallHttpClient
+public class ScryfallHttpClient : IScryfallClient
 {
     private readonly HttpClient _httpClient;
     private const int RateLimitMilliseconds = 100;
@@ -18,7 +21,7 @@ public class ScryfallHttpClient
         _httpClient = httpClient;
     }
     
-    public async Task<ICardData?> NamedSearchAsync(NamedSearchOptions options)
+    public async Task<ICardData?> NamedSearchAsync(ScryfallNamedSearchOptions options)
     {
         try
         {
@@ -41,13 +44,25 @@ public class ScryfallHttpClient
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var searchResult =
-                    JsonSerializer.Deserialize<NamedSearchReponse>(content, DefaultJsonSerializerOptions);
+                    JsonSerializer.Deserialize<ScryfallCardModel>(content, DefaultJsonSerializerOptions);
                 if (searchResult is not null)
                 {
+                    var images = new List<string>();
+
+                    if (searchResult.ImageUris is not null)
+                    {
+                        images.Add(searchResult.ImageUris.Normal);
+                    }
+                    
+                    foreach (var face in searchResult.CardFaces)
+                    {
+                        images.Add(face.ImageUris.Normal);
+                    }
+                    
                     return new CardData(
                         searchResult.Name,
                         searchResult.ScryfallUri,
-                        searchResult.ImageUris.Normal
+                        images.ToArray()
                     );
                 }
             }

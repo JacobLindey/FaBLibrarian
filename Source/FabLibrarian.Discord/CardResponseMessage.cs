@@ -5,12 +5,12 @@ namespace FabLibrarian.Discord;
 
 public class CardResponseMessage
 {
-    public CardResponseMessage(IEnumerable<string> search, IEnumerable<ICardData?> card)
+    public CardResponseMessage(IReadOnlyCollection<(string, ICardData?)> results)
     {
-        Results = search.Zip(card);
+        Results = results;
     }
 
-    public IEnumerable<(string, ICardData?)> Results { get; }
+    public IReadOnlyCollection<(string, ICardData?)> Results { get; }
 
     public async Task SendMessageAsync(IUserMessage message)
     {
@@ -28,12 +28,15 @@ public class CardResponseMessage
             }
             else
             {
-                var embed = new EmbedBuilder()
-                           .WithTitle(card.CardName)
-                           .WithUrl(card.DatabaseUrl)
-                           .WithImageUrl(card.ImageUri)
-                           .Build();
-                embeds.Add(embed);
+                foreach (var image in card.ImageUris)
+                {
+                    var embed = new EmbedBuilder()
+                               .WithTitle(card.CardName)
+                               .WithUrl(card.DatabaseUrl)
+                               .WithImageUrl(image)
+                               .Build();
+                    embeds.Add(embed);
+                }
             }
         }
         
