@@ -27,7 +27,8 @@ public class ScryfallService : IScryfallService
             {
                 Console.WriteLine($"[ScryfallService#NamedSearchAsync {{ fuzzy : {option.Fuzzy} }}] starting search...");
                 var result = await _scryfallClient.NamedSearchAsync(option);
-                Console.WriteLine($"[ScryfallService#NamedSearchAsync {{ fuzzy : {option.Fuzzy} }}] found: {result}");
+                var found = result is not null ? result.ToString() : "none";
+                Console.WriteLine($"[ScryfallService#NamedSearchAsync {{ fuzzy : {option.Fuzzy} }}] found: {found}");
                 responses.Add(result);
             }
             finally

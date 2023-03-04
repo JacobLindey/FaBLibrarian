@@ -5,5 +5,5 @@ namespace FabLibrarian.CardLibrary.Services.Local.Abstractions;
 
 public interface ILocalService
 {
-    Task<IReadOnlyCollection<ICardData?>> NamedSearchAsync(params LocalNamedSearchOptions[] options);
+    Task<ISearchResult> NamedSearchAsync(LocalNamedSearchOptions options);
 }

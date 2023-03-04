@@ -12,32 +12,62 @@ public class InMemoryLocalClient : ILocalClient
     {
         _cards = cards;
     }
-    
-    public Task<ICardData?> NamedSearchAsync(LocalNamedSearchOptions options)
+
+    private ISearchResult DoNamedSearch(LocalNamedSearchOptions options)
     {
         const double MatchThreshold = 0.50;
+        const double NearnessThreshold = 0.10;
         
-        return Task.Run(() =>
-        {
-            LocalCardModel? matchedCard = null;
-            foreach (var card in _cards)
-            {
-                var similarity = FindSimilarity(card, options.Fuzzy);
-                if (similarity > MatchThreshold)
-                {
-                    if (matchedCard is not null)
-                    {
-                        return null;
-                    }
-                    
-                    matchedCard = card;
-                }
-            }
+        var matrix = _cards
+                    .Select(x => FindSimilarity(x, options.Fuzzy))
+                    .Zip(_cards, (Similarity, Card) => (Similarity, Card))
+                    .ToList();
+            
+        var matches = matrix.Where(x => x.Item1 > MatchThreshold).ToList();
 
-            return matchedCard is not null
-                ? (ICardData) new CardData(matchedCard.CardName, matchedCard.DatabaseUrl, matchedCard.ImageUris)
-                : null;
-        });
+        var count = matches.Count;
+        switch (count)
+        {
+            case 0:
+            {
+                var closest = matrix.MaxBy(x => x.Item1);
+                return new NoMatchSearchResult(
+                    options.Fuzzy,
+                    ResultToSuccess(options.Fuzzy, closest)
+                );
+            }
+            case 1:
+            {
+                var match = matches[0];
+                return ResultToSuccess(options.Fuzzy, match);
+            }
+            default:
+                var nearMatches = matches.OrderByDescending(x => x.Similarity).Take(2).ToList();
+
+                if (nearMatches[0].Similarity - nearMatches[1].Similarity < NearnessThreshold)
+                {
+                    return new AmbiguousSearchResult(
+                        options.Fuzzy,
+                        nearMatches.Select(x => ResultToSuccess(options.Fuzzy, x))
+                    );
+                }
+
+                return ResultToSuccess(options.Fuzzy, nearMatches[0]);
+        }
+    }
+
+    private static SuccessLocalNamedSearchResult ResultToSuccess(string search, (double, LocalCardModel) result)
+    {
+        return new SuccessLocalNamedSearchResult(
+            search,
+            new CardData(result.Item2.CardName, result.Item2.DatabaseUrl, result.Item2.ImageUris),
+            result.Item1
+        );
+    }
+    
+    public Task<ISearchResult> NamedSearchAsync(LocalNamedSearchOptions options)
+    {
+        return Task.Run(() => DoNamedSearch(options));
     }
 
     private static double FindSimilarity(LocalCardModel cardModel, string fuzzy)
@@ -48,13 +78,7 @@ public class InMemoryLocalClient : ILocalClient
         return nameSplits
            .Max(nameSplit =>
                 fuzzySplits
-                   .Select(fuzzySplit =>
-                    {
-                        var r = fuzzySplit.LevenshteinTokenRatio(nameSplit);
-                        Console.WriteLine(
-                            $"[LocalCardData#IsMatch {{ CardName: '{nameSplit}', fuzzy:'{fuzzySplit}' }}] {r:P0} similarity");
-                        return r;
-                    })
+                   .Select(fuzzySplit => fuzzySplit.LevenshteinTokenRatio(nameSplit))
                    .Max()
             );
     }

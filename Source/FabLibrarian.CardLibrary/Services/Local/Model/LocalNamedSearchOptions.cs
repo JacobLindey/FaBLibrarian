@@ -1,4 +1,6 @@
-﻿namespace FabLibrarian.CardLibrary.Services.Local.Model;
+﻿using FabLibrarian.CardLibrary.Model;
+
+namespace FabLibrarian.CardLibrary.Services.Local.Model;
 
 public class LocalNamedSearchOptions
 {
@@ -8,4 +10,9 @@ public class LocalNamedSearchOptions
     }
     
     public string Fuzzy { get; }
+
+    public static LocalNamedSearchOptions From(NamedSearchRequest request)
+    {
+        return new LocalNamedSearchOptions(request.FuzzyName);
+    }
 }
