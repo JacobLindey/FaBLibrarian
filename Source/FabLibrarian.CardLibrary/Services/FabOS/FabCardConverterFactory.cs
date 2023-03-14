@@ -5,16 +5,16 @@ using FabLibrarian.CardLibrary.Services.Local.Model;
 
 namespace FabLibrarian.CardLibrary.Services.FabOS;
 
-public class FabCardConverterFactory : ILocalCardModelConverter<FabCardDao>
+public class FabCardConverterFactory : ILocalCardModelConverter<CardDao>
 {
-    private readonly IReadOnlyCollection<FabCardDao> _daos;
+    private readonly IReadOnlyCollection<CardDao> _daos;
 
-    public FabCardConverterFactory(IReadOnlyCollection<FabCardDao> daos)
+    public FabCardConverterFactory(IReadOnlyCollection<CardDao> daos)
     {
         _daos = daos;
     }
     
-    private LocalCardModel ToLocalCardModel(IReadOnlyList<FabCardDao> daos)
+    private LocalCardModel ToLocalCardModel(IReadOnlyList<CardDao> daos)
     {
         Debug.Assert(daos.Any());
         Debug.Assert(daos.Select(x => x.Name).Distinct().Count() == 1);
@@ -26,6 +26,8 @@ public class FabCardConverterFactory : ILocalCardModelConverter<FabCardDao>
         foreach (var dao in daos)
         {
             var defaultPrinting = dao.Printings.FirstOrDefault(x => x.ImageUrl is not null);
+            if (defaultPrinting?.ImageUrl is null) continue;
+
             imageUris.Add(defaultPrinting.ImageUrl);
 
             if (defaultPrinting.DoubleSidedCardInfo is not null && defaultPrinting.DoubleSidedCardInfo.Any())
@@ -33,7 +35,10 @@ public class FabCardConverterFactory : ILocalCardModelConverter<FabCardDao>
                 var otherSide = defaultPrinting.DoubleSidedCardInfo[0];
                 if (otherSide.IsDFC)
                 {
-                    var otherImage = GetOtherImage(otherSide.OtherFaceUniqueId);
+                    var otherImage = otherSide.IsFront 
+                        ? GetReferencedImage(otherSide.OtherFaceUniqueId)
+                        : GetReferencingImage(defaultPrinting.UniqueId);
+
                     if (otherImage is not null)
                     {
                         imageUris.Add(otherImage);
@@ -45,9 +50,21 @@ public class FabCardConverterFactory : ILocalCardModelConverter<FabCardDao>
         return new LocalCardModel(cardName, databaseUrl, imageUris.ToArray());
     }
 
-    private string? GetOtherImage(string uniqueId)
+    private string? GetReferencedImage(string uniqueId)
     {
         return _daos.FirstOrDefault(x => x.Printings.Any(printing => printing.UniqueId == uniqueId))?.Printings[0].ImageUrl;
+    }
+
+    private string? GetReferencingImage(string uniqueId)
+    {
+        return _daos.FirstOrDefault(
+                x => x.Printings.Any(
+                    printing =>
+                        printing.UniqueId != uniqueId &&
+                        printing.DoubleSidedCardInfo is not null && 
+                        printing.DoubleSidedCardInfo[0].OtherFaceUniqueId == uniqueId)
+            )?
+           .Printings[0].ImageUrl;
     }
 
     public IEnumerable<LocalCardModel> ToLocalCardModels()
